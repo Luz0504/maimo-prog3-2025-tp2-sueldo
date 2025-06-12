@@ -28,8 +28,9 @@ const MovieGrid = () => {
     }, [])
 
   return (
-    <div className="grid grid-cols-12 gap-3">
+    <div className="grid grid-cols-6 gap-5 p-3 text-1xl">
         {!loading &&
+                
             data.map((result) => (
                 <MovieCard
                     title={result.title}
@@ -39,7 +40,7 @@ const MovieGrid = () => {
                 />
         ))}
 
-        {loading && "Loading..."}
+        {loading && "Loading"}
         {error && "Hubo un error"}
 
     </div>

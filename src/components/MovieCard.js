@@ -7,15 +7,14 @@ const MovieCard = ({id, title, poster_path}) => {
   
   return (
     <div>
-      <h2>{title}</h2>
-      <Image
+      <Link href={`/movie/${id}`}>
+        <Image
         src={IMG_BASE_URL + poster_path}
         width={900}
         height={900}
         alt={title}
+        className="hover:pseudo-class hover:opacity-65"
       />
-      <Link href={`/movie/${id}`}>
-            Ver Más
       </Link>
     </div>
   )

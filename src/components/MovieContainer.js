@@ -33,27 +33,33 @@ const MovieContainer = ({id}) => {
   if (error || !data) return <p>Hubo un error cargando los datos.</p>;
 
   return (
-    <div className="max-w-4xl mx-auto p-4">
-      <h1 className="text-4xl font-bold mb-4">{data.title}</h1>
-
+    <div
+    style={{
+            backgroundImage:`url(https://image.tmdb.org/t/p/original/${data.backdrop_path})`,
+        }}
+        className={`w-full h-[100vh] bg-cover bg-no-repeat bg-center`}
+    >
+      
       <Image
         src={IMG_BASE_URL + data.poster_path}
         alt={data.title}
-        width={500}
-        height={750}
-        className="rounded-lg shadow-lg mb-6"
+        width={800}
+        height={450}
+        className="rounded-b-[200] float-right w-[29%] pl-0 pr-6 pt-5 shadow-black-x1/90"
       />
 
-      <p><strong>Popularidad:</strong> {data.popularity}</p>
-      <p><strong>Fecha de estreno:</strong> {data.release_date}</p>
-      <p><strong>Duración:</strong> {data.runtime} minutos</p>
-      <p><strong>Promedio de votos:</strong> {data.vote_average}</p>
-
+      <div className="bg-gradient-to-r from-black to-black-80% float-left h-[100vh] w-[70%] pt-5 pl-15 pb-[9.55%] pr-[10%]">
+      <h1 className="text-4xl font-bold mb-4">{data.title}</h1>
+      <h2>Popularidad</h2><p> {data.popularity}</p>
+      <h2>Fecha de estreno</h2><p> {data.release_date}</p>
+      <h2>Duración</h2><p> {data.runtime} minutos</p>
+      <h2>Promedio de votos</h2><p>{data.vote_average}</p>
       {data.genres && data.genres.length > 0 && (
-        <p><strong>Géneros:</strong> {data.genres.map(g => g.name).join(', ')}</p>
+        <h2>Géneros:<span>{data.genres.map(g => g.name).join(', ')}</span></h2>
       )}
+      <h2 className="mt-4">Descripción:</h2> <p>{data.overview}</p>
+      </div>
 
-      <p className="mt-4"><strong>Descripción:</strong> {data.overview}</p>
     </div>
 );
 
