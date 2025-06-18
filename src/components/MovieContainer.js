@@ -2,6 +2,9 @@
 
 import Image from "next/image"
 import {useState, useEffect} from "react"
+import { useAppContext } from "@/app/contexts/AppContext";
+import AgregarFav from "@/components/AgregarFav";
+import QuitarFav from "@/components/QuitarFav";
 
 const IMG_BASE_URL = "https://image.tmdb.org/t/p/original";
 
@@ -10,6 +13,8 @@ const MovieContainer = ({id}) => {
   const [data, setData] = useState();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const { favorites, handleAddToFavorites, handleRemove } = useAppContext();
+  const isFavorite = favorites.some(fav => fav.id == id);
 
   useEffect (() => {
 
@@ -48,18 +53,34 @@ const MovieContainer = ({id}) => {
         className="rounded-b-[200] float-right w-[29%] pl-0 pr-6 pt-5 shadow-black-x1/90"
       />
 
-      <div className="bg-gradient-to-r from-black to-black-80% float-left h-[100vh] w-[70%] pt-5 pl-15 pb-[9.55%] pr-[10%]">
+      <div className="bg-gradient-to-r from-black to-black-80% float-left h-[100vh] w-[70%] pt-5 pl-15 pb-[9.55%] pr-[10%] text-amber-50">
       <h1 className="text-4xl font-bold mb-4">{data.title}</h1>
-      <h2>Popularidad</h2><p> {data.popularity}</p>
-      <h2>Fecha de estreno</h2><p> {data.release_date}</p>
-      <h2>Duración</h2><p> {data.runtime} minutos</p>
-      <h2>Promedio de votos</h2><p>{data.vote_average}</p>
-      {data.genres && data.genres.length > 0 && (
-        <h2>Géneros:<span>{data.genres.map(g => g.name).join(', ')}</span></h2>
-      )}
-      <h2 className="mt-4">Descripción:</h2> <p>{data.overview}</p>
+      
+      <div className="flex gap-10 my-8">
+        <div><h2>Fecha de estreno</h2><p> {data.release_date}</p></div>
+        <div><h2>Duración</h2><p> {data.runtime} minutos</p></div>
       </div>
-
+      <div className="flex gap-22 mb-8">
+        <div><h2>Popularidad</h2><p> {data.popularity}</p></div>
+        <div><h2>Promedio de votos</h2><p>{data.vote_average}⭐</p></div>
+      </div>
+      <div className="flex">
+      {data.genres && data.genres.length > 0 && (
+        <h2>Géneros: <span>{data.genres.map(g => g.name).join(' ')}</span></h2>
+      )}
+      </div>
+      <div className="mb-8">
+        <h2 className="mt-4">Descripción:</h2> <p>{data.overview}</p>
+      </div>
+      <div className="flex w-60">
+        {isFavorite ? (
+          <QuitarFav onClick={() => handleRemove(data.id)} />
+        ) : (
+          <AgregarFav onClick={() => handleAddToFavorites(data.title, data.poster_path, data.id)} />
+        )}
+      </div>
+      </div>
+      
     </div>
 );
 

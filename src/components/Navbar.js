@@ -1,9 +1,12 @@
+'use client'
+
 import Image from "next/image"
 import Link from "next/link"
 
 const Navbar = () => {
+
   return (
-    <div className="flex flex-row justify-between p-4 bg-teal-950 lg:bg-teal-950 items-center text-amber-50">
+    <div className="flex flex-row justify-between px-15 py-5 bg-gradient-to-b bg-black items-center text-amber-50">
         
         <div className="flex direction-row items-center">
                 <Image 
@@ -12,12 +15,12 @@ const Navbar = () => {
                 height={100}
                 alt="reel"
                 />
-                <div>PelisMax</div>
+                <Link href='/'><h3>ReelSearch</h3></Link>
         </div>
         <nav >
             <ul className="flex flex-row gap-3">
                 <Link href='/'><li>Home</li></Link>
-                <li>Pelis</li>
+                <Link href='/favorites'><li>Favoritos</li></Link>
             </ul>
         </nav>
     </div>

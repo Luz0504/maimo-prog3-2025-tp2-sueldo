@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import axios from "axios";
+import Image from "next/image";
 
 const Banner = () => {
   const [featuredMovie, setFeaturedMovie] = useState(null);
@@ -26,9 +27,10 @@ const Banner = () => {
       style={{
         backgroundImage: `url(https://image.tmdb.org/t/p/original/${featuredMovie.backdrop_path})`
       }}
-      className="w-full h-[500px] bg-cover bg-no-repeat bg-center text-white"
+      className="w-full h-[500px] bg-cover bg-no-repeat bg-center text-white relative-absolute z-0"
     >
-      <div className="bg-black opacity-70 h-full flex flex-col justify-center p-8">
+
+      <div className="bg-black bg-cover opacity-70 h-full flex flex-col justify-center p-8">
         <h1 className="text-4xl font-bold mb-4">{featuredMovie.title}</h1>
         <p className="max-w-2xl">{featuredMovie.overview}</p>
       </div>

@@ -4,6 +4,7 @@ import {useState, useEffect} from "react"
 import axios from 'axios';
 import movieData from "@/app/data/movies";
 import MovieCard from "@/components/MovieCard";
+import Loading from "@/components/Loading";
 
 const MovieGrid = () => {
     const [data, setData] = useState([])
@@ -28,7 +29,7 @@ const MovieGrid = () => {
     }, [])
 
   return (
-    <div className="grid grid-cols-6 gap-5 p-3 text-1xl">
+    <div className="mx-20 grid grid-cols-6 gap-5 p-3 text-1xl">
         {!loading &&
                 
             data.map((result) => (
@@ -40,7 +41,7 @@ const MovieGrid = () => {
                 />
         ))}
 
-        {loading && "Loading"}
+        {loading && <Loading />}
         {error && "Hubo un error"}
 
     </div>
